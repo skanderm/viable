@@ -9,7 +9,7 @@ Inspired by the principles of cybernetics, the Viable System Model (VSM) was dev
 
 ![The Viable System Model](/docs/vsm_simple.png)
 
-[Click here](/docs/vsm_full.svg) for a more detailed view of the VSM.
+[Click here](#detailed-vsm) for a more detailed view of the VSM.
 
 
 ## Development
@@ -80,3 +80,7 @@ to_environment_id | uuid | Environment ID destination
 - [Ash Framework repository](https://github.com/ash-project/ash)
 - [Ash Framework guide](https://hexdocs.pm/ash/getting_started.html)
 - [Brain of the Firm](https://www.goodreads.com/en/book/show/1304488.Brain_of_the_Firm)
+
+
+## Detailed VSM illustration
+![Detailed VSM](/docs/vsm_full.svg)
