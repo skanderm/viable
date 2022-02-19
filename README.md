@@ -9,7 +9,7 @@ Inspired by the principles of cybernetics, the Viable System Model (VSM) was dev
 
 ![The Viable System Model](/docs/vsm_simple.png)
 
-For a more detailed view of the VSM, [click here](/docs/VSM.svg).
+[Click here](/docs/vsm_full.svg) for a more detailed view of the VSM.
 
 
 ## Development
