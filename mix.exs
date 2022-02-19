@@ -35,6 +35,7 @@ defmodule Viable.MixProject do
     [
       {:ash, "~> 1.51"},
       {:ash_postgres, "~> 0.41.7"},
+      {:ash_json_api, "~> 0.28.6"},
       {:phoenix, "~> 1.6.6"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},

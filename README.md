@@ -67,10 +67,10 @@ Column | Type | Description
 -------|:----:| -----------
 id | uuid | Automatically created
 name | string | Name of the channel if useful (e.g. "resource bargain", "check-in/auditing")
-from_id | uuid | System or Environment ID
-from_type | enum | {System, Environment}
-to_id | uuid | System or Environment ID
-to_type | enum | {System, Environment}
+from_system_id | uuid | System ID source
+to_system_id | uuid | System ID destination
+from_environment_id | uuid | Environment ID source
+to_environment_id | uuid | Environment ID destination
 
 
 ## Resources
