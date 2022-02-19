@@ -1,5 +1,5 @@
 defmodule Viable.Environment do
-  use Ash.Resource, data_layer: AshPostgres.DataLayer
+  use Ash.Resource, data_layer: AshPostgres.DataLayer, extensions: [AshJsonApi.Resource]
 
   postgres do
     table "environments"
@@ -25,4 +25,19 @@ defmodule Viable.Environment do
       destination_field :parent_id
     end
   end
+
+  json_api do
+    type "environment"
+
+    routes do
+      base "/environments"
+
+      get :read
+      index :read
+      post :create
+      patch :update
+      delete :destroy
+    end
+  end
+
 end

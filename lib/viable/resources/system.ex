@@ -1,5 +1,7 @@
 defmodule Viable.System do
-  use Ash.Resource, data_layer: AshPostgres.DataLayer
+  use Ash.Resource,
+    data_layer: AshPostgres.DataLayer,
+    extensions: [AshJsonApi.Resource]
 
   postgres do
     table "systems"
@@ -11,7 +13,9 @@ defmodule Viable.System do
 
     attribute :name, :string
     attribute :description, :string
-    attribute :type, :atom, constraints: [one_of: [:one, :two, :three, :three_star, :four, :five]]
+
+    attribute :type, :atom,
+      constraints: [one_of: [:one, :two, :three, :three_star, :four, :five]]
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
@@ -24,6 +28,20 @@ defmodule Viable.System do
 
     has_many :children, Viable.System do
       destination_field :parent_id
+    end
+  end
+
+  json_api do
+    type "system"
+
+    routes do
+      base "/systems"
+
+      get :read
+      index :read
+      post :create
+      patch :update
+      delete :destroy
     end
   end
 end

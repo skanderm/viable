@@ -1,7 +1,7 @@
 defmodule Viable.Api do
-  use Ash.Api
+  use Ash.Api, extensions: [AshJsonApi.Api]
 
   resources do
-    registry Viable.Registery
+    registry Viable.Registry
   end
 end
