@@ -1,11 +1,11 @@
 # Viable
 
-Viable helps organizations become more effective by modeling their operations using the [Viable System Model](https://en.wikipedia.org/wiki/Viable_system_model). Viable provides tools to organizations to label and regulate their subsystems. Viable can be used to diagnose missing (necessary) organizational functionality and communication channels, and may eventually allow real-time insight into to an organization's health.
+Viable helps organizations become more effective by modeling their operations using the [Viable System Model](https://en.wikipedia.org/wiki/Viable_system_model). Viable provides tools to organizations to label and regulate their subsystems. Viable can be used to diagnose missing (necessary) organizational functionality and communication channels, and may eventually allow real-time insight into an organization's health.
 
 
 ## The Viable System Model
 
-Inspired by the principles of cybernetics, the Viable System Model (VSM) was developed and refined by Stafford Beer for effective organizing of complex systems. [Project CyberSyn](https://en.wikipedia.org/wiki/Project_Cybersyn) applied the VSM to coordinate the Chilean economy in the early 1970s. For further reading, please see [Brain of the Firm](https://www.goodreads.com/en/book/show/1304488.Brain_of_the_Firm).
+Inspired by the principles of cybernetics, the Viable System Model (VSM) was developed and refined by Stafford Beer for effective organizing of complex systems autonomous systems. Chile's first democratically elected socialist government built [Project CyberSyn](https://en.wikipedia.org/wiki/Project_Cybersyn) in the early 1970s to apply the VSM to successfully coordinate its economy. For further reading, please see [Brain of the Firm](https://www.goodreads.com/en/book/show/1304488.Brain_of_the_Firm).
 
 ![The Viable System Model](/docs/vsm_simple.png)
 
@@ -57,7 +57,7 @@ Column | Type | Description
 -------|:----:| -----------
 id | uuid | Automatically created
 name | string | Name of the external environment - suppliers, other orgs, etc
-parent_id | uuid | If useful, the meta-environment this belongs to. e.g. industry
+parent_id | uuid | If useful, the meta-environment this belongs to. e.g. federation, collective
 
 
 #### Channel
