@@ -8,7 +8,7 @@ curl -s -X POST 'http://localhost:4000/api/systems' \
         "data": {
             "attributes": {
                 "name": "Viable Coop",
-                "type": "one",
+                "level": "one",
                 "description": "The whole org"
             },
             "type": "system"
@@ -25,7 +25,7 @@ curl -s -X POST 'http://localhost:4000/api/systems' \
             "type": "system",
             "attributes": {
                 "name": "General assembly",
-                "type": "five",
+                "level": "five",
                 "description": "When we meet every year"
             }
         }
@@ -41,7 +41,7 @@ curl -s -X POST 'http://localhost:4000/api/systems' \
             "type": "system",
             "attributes": {
                 "name": "Monthly news survey",
-                "type": "four",
+                "level": "four",
                 "description": "When we get together and look for new cooperatives to reach out to"
             }
         }
@@ -56,7 +56,7 @@ curl -s -X POST 'http://localhost:4000/api/systems' \
             "type": "system",
             "attributes": {
                 "name": "Biweekly planning and budgeting meeting",
-                "type": "three",
+                "level": "three",
                 "description": "Where we look over our backlog and decide what to schedule for the next cycle"
             }
         }
@@ -71,7 +71,7 @@ curl -s -X POST 'http://localhost:4000/api/systems' \
             "type": "system",
             "attributes": {
                 "name": "End of week happy hour",
-                "type": "three_star",
+                "level": "three_star",
                 "description": ""
             }
         }
@@ -86,7 +86,7 @@ curl -s -X POST 'http://localhost:4000/api/systems' \
             "type": "system",
             "attributes": {
                 "name": "Daily group task updates",
-                "type": "two",
+                "level": "two",
                 "description": "Where we check the task list and make sure not to take another person''s task"
             }
         }
@@ -101,7 +101,7 @@ curl -s -X POST 'http://localhost:4000/api/systems' \
             "type": "system",
             "attributes": {
                 "name": "Data science team",
-                "type": "one",
+                "level": "one",
                 "description": "They figure out the math for algedonic signals"
             }
         }
@@ -116,7 +116,7 @@ curl -s -X POST 'http://localhost:4000/api/systems' \
             "type": "system",
             "attributes": {
                 "name": "Organizers",
-                "type": "one",
+                "level": "one",
                 "description": "They work with our partner organizations"
             }
         }
@@ -131,8 +131,26 @@ curl -s -X POST 'http://localhost:4000/api/systems' \
             "type": "system",
             "attributes": {
                 "name": "Web app team",
-                "type": "one",
+                "level": "one",
                 "description": "They build the website"
             }
         }
     }' | jq
+
+curl -s -X POST 'http://localhost:4000/api/systems' \
+    -H 'Content-Type: application/vnd.api+json' \
+    -H "Accept: application/vnd.api+json" \
+    -d \
+    '{
+        "data": {
+            "type": "system",
+            "attributes": {
+                "name": "Propaganda (marketing) team",
+                "level": "one",
+                "description": "They deal with communications!"
+            },
+            "relationships": {
+                "parent": {"data": {"id": "0cc29d74-2e7e-483b-b121-745024241e9b", "type": "system"}}
+            }
+        }
+    }'

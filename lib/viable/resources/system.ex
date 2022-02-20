@@ -14,7 +14,7 @@ defmodule Viable.System do
     attribute :name, :string
     attribute :description, :string
 
-    attribute :type, :atom, constraints: [one_of: [:one, :two, :three, :three_star, :four, :five]]
+    attribute :level, :atom, constraints: [one_of: [:one, :two, :three, :three_star, :four, :five]]
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
@@ -46,7 +46,7 @@ defmodule Viable.System do
 
   actions do
     create :create do
-      accept [:id, :name, :description, :type]
+      accept [:id, :name, :description, :level]
 
       argument :parent, :map
 
