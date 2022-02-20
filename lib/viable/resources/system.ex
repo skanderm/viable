@@ -43,4 +43,14 @@ defmodule Viable.System do
       delete :destroy
     end
   end
+
+  actions do
+    create :create do
+      accept [:id, :name, :description, :type]
+
+      argument :parent, :map
+
+      change manage_relationship(:parent, type: :replace)
+    end
+  end
 end

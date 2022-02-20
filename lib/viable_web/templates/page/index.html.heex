@@ -7,6 +7,13 @@
   </h1>
   <p class="text-xl text-slate-700">Viable helps prefigurative autonomous organizations become more effective by using the Viable System Model.</p>
 
-  <p>So far, all systems defined:</p>
-  <%= inspect(@system_json) %>
+  <p class="my-5">So far, all systems defined:</p>
+  <%= for {system, json} <- @system_jsons do %>
+    <div class="mb-3">
+      <span class="text-emerald-800">[<%= system.type %>]</span> <%= system.name %> <span class="text-slate-400">(id: <%= system.id %>)</span>
+      <%= if system.description do %>
+        <p class="text-slate-500"><%= system.description %></p>
+      <% end %>
+    </div>
+  <% end %>
 </div>
