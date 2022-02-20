@@ -14,8 +14,7 @@ defmodule Viable.System do
     attribute :name, :string
     attribute :description, :string
 
-    attribute :type, :atom,
-      constraints: [one_of: [:one, :two, :three, :three_star, :four, :five]]
+    attribute :type, :atom, constraints: [one_of: [:one, :two, :three, :three_star, :four, :five]]
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
@@ -39,7 +38,7 @@ defmodule Viable.System do
 
       get :read
       index :read
-      post :create
+      post :create, relationship_arguments: [:parent]
       patch :update
       delete :destroy
     end
