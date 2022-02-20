@@ -18,13 +18,13 @@ The project is currently an [Elixir Phoenix](https://www.phoenixframework.org/) 
 
 ### Setup
 
-Viable uses [`asdf`](https://github.com/asdf-vm/asdf) as its language version manager. As of this writing, we are using Elixir version `1.13.3-otp-24` and Node version `17.5.0`. Set up `asdf` with the [Elixir plugin](https://github.com/asdf-vm/asdf-elixir) and the [Node.js plugin](https://github.com/asdf-vm/asdf-nodejs) and run `asdf install`. Once Elixir is installed, run
+Viable uses [`asdf`](https://github.com/asdf-vm/asdf) as its language version manager. As of this writing, we are using Elixir version `1.13.3-otp-24` and Node version `17.5.0`. Set up `asdf` with the [Elixir plugin](https://github.com/asdf-vm/asdf-elixir) and the [Node.js plugin](https://github.com/asdf-vm/asdf-nodejs) and run `asdf install`. Once Elixir is installed, install dependencies with
 
 
 `mix deps.get`
 
 
-to install dependencies, then run `mix ecto.create` to create the postgres database. If `picosat_elixir` fails to compile, you may need to `unset LDFLags`.
+then run `mix ecto.create` to create the postgres database. If `picosat_elixir` fails to compile, you may need to run `unset LDFLAGS`.
 
 
 #### Node
