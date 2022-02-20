@@ -48,7 +48,7 @@ Column | Type | Description
 id | uuid | Automatically created
 name | string | Name of the system (e.g. 'Kitchen operations' for a System 1 in a restaurant)
 description | string | Description of the system, (e.g. 'Assign tasks for the day using whiteboard' as a system 2 coordinating function)
-type | enum | System number/type: {one, two, three, three_star, four, five}
+level | enum | System number/level: {one, two, three, three_star, four, five}
 parent_id | uuid | The parent System 1 this subsystem belongs to
 system_type | string | Exclusively on System 1: Whether it's an organization, team, working group, collective, etc.
 
