@@ -2,7 +2,7 @@ defmodule ViableWeb.PageController do
   use ViableWeb, :controller
 
   def index(conn, _params) do
-    systems = Viable.System |> Viable.Api.read!
+    systems = Viable.System |> Ash.Query.load(:parent) |> Viable.Api.read!
 
     system_attrs = Ash.Resource.Info.attributes(Viable.System) |> Enum.map(&Map.get(&1, :name))
 

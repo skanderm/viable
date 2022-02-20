@@ -46,10 +46,8 @@ defmodule Viable.System do
 
   actions do
     create :create do
-      accept [:id, :name, :description, :level]
-
       argument :parent, :map
-
+      accept [:id, :name, :description, :level]
       change manage_relationship(:parent, type: :replace)
     end
   end

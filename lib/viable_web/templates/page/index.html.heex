@@ -10,7 +10,10 @@
   <p class="my-5">So far, all systems defined:</p>
   <%= for {system, json} <- @system_jsons do %>
     <div class="mb-3">
-      <span class="text-emerald-800">[<%= system.level %>]</span> <%= system.name %> <span class="text-slate-400">(id: <%= system.id %>)</span>
+      <span class="text-emerald-800">[<%= system.level %>]</span>
+      <%= system.name %>
+      <span class="text-slate-400">(id: <%= system.id %>) </span>
+      <%= if system.parent do %> <div class="text-sm"><%= "<#{system.parent.name}>" %></div> <% end %>
       <%= if system.description do %>
         <p class="text-slate-500"><%= system.description %></p>
       <% end %>
