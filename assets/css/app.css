@@ -1,3 +1,7 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+/* NOTE: To add @import statements after tailwind, convert all current
+ * @tailwind directives to @import "taildwincss/...";
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
