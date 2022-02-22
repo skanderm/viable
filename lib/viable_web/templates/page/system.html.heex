@@ -1,0 +1,11 @@
+<%= for {system, json} <- @systems do %>
+  <div class="mb-3">
+    <span class="text-emerald-800">[<%= system.level %>]</span>
+    <%= system.name %>
+    <span class="text-slate-400">(id: <%= system.id %>) </span>
+    <%= if system.parent do %> <div class="text-sm"><%= "<#{system.parent.name}>" %></div> <% end %>
+    <%= if system.description do %>
+      <p class="text-slate-500"><%= system.description %></p>
+    <% end %>
+  </div>
+<% end %>

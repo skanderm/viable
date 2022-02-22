@@ -20,6 +20,7 @@ defmodule ViableWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    live "/system", SystemLive
   end
 
   # Other scopes may use custom stacks.
@@ -41,7 +42,7 @@ defmodule ViableWeb.Router do
     scope "/" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: ViableWeb.Telemetry
+      live_dashboard "/dashboard", metrics: ViableWeb.Telemetry, ecto_repos: [Viable.Repo]
     end
   end
 
