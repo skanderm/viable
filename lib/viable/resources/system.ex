@@ -11,7 +11,7 @@ defmodule Viable.System do
   attributes do
     uuid_primary_key :id
 
-    attribute :name, :string
+    attribute :name, :string, allow_nil?: false, constraints: [min_length: 1]
     attribute :description, :string
 
     attribute :level, :atom, constraints: [one_of: [:one, :two, :three, :three_star, :four, :five]]
