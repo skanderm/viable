@@ -1,6 +1,8 @@
 defmodule ViableWeb.SystemLive.New do
   use ViableWeb, :live_view
 
+  require Ash.Query
+
   def new_form() do
     Viable.System
     |> AshPhoenix.Form.for_create(:create,
@@ -20,7 +22,13 @@ defmodule ViableWeb.SystemLive.New do
   end
 
   def mount(_params, context, socket) do
-    {:ok, assign(socket, form: new_form())}
+    parent_options = Viable.System
+    |> Ash.Query.filter(level == :one)
+    |> Viable.Api.read!()
+    |> Enum.map(&{&1.name, &1})
+    |> Enum.into([])
+
+    {:ok, assign(socket, form: new_form(), parent_options: parent_options)}
   end
 
   # In order to use the `add_form` and `remove_form` helpers, you
