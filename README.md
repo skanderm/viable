@@ -36,7 +36,7 @@ To set up node dependencies, `cd assets` and run `npm install`. Go back to the p
 and visit `http://localhost:4000` in your browser.
 
 
-### Data model
+### Domain model
 
 The current resources are:
 
