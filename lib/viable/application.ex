@@ -15,7 +15,8 @@ defmodule Viable.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Viable.PubSub},
       # Start the Endpoint (http/https)
-      ViableWeb.Endpoint
+      ViableWeb.Endpoint,
+      {Registry, keys: :unique, name: Viable.Registry},
       # Start a worker by calling: Viable.Worker.start_link(arg)
       # {Viable.Worker, arg}
     ]

@@ -3,6 +3,8 @@ defmodule ViableWeb.SystemLive.New do
 
   require Ash.Query
 
+  alias ViableWeb.SystemLive
+
   def new_form() do
     Viable.System
     |> AshPhoenix.Form.for_create(:create,
@@ -22,11 +24,12 @@ defmodule ViableWeb.SystemLive.New do
   end
 
   def mount(_params, context, socket) do
-    parent_options = Viable.System
-    |> Ash.Query.filter(level == :one)
-    |> Viable.Api.read!()
-    |> Enum.map(&{&1.name, &1})
-    |> Enum.into([])
+    parent_options =
+      Viable.System
+      |> Ash.Query.filter(level == :one)
+      |> Viable.Api.read!()
+      |> Enum.map(&{&1.name, &1})
+      |> Enum.into([])
 
     {:ok, assign(socket, form: new_form(), parent_options: parent_options)}
   end
@@ -44,7 +47,10 @@ defmodule ViableWeb.SystemLive.New do
   def handle_event("save", _params, socket) do
     case AshPhoenix.Form.submit(socket.assigns.form) do
       {:ok, result} ->
-        # Do something with the result, like redirect
+        with [{pid, pid}] <- Registry.lookup(Viable.Registry, ViableWeb.SystemLive) do
+          GenServer.call(pid, :update_list)
+        end
+
         {:noreply, assign(socket, :form, new_form())}
 
       {:error, form} ->
