@@ -1,4 +1,9 @@
-<%= for {system, json} <- @systems do %>
+<%= live_render(
+  @socket,
+  ViableWeb.SystemLive.New,
+  id: "#{@system.id}_new",
+  session: %{"parent_id" => @system.id}) %>
+<%= for system <- [@system | @system.children] do %>
   <div class="mb-3">
     <span class="text-emerald-800">[<%= system.level %>]</span>
     <%= system.name %>

@@ -1,17 +1,15 @@
 defmodule ViableWeb.PageController do
   use ViableWeb, :controller
 
+  require Ash.Query
+
   def index(conn, _params) do
-    systems = Viable.System |> Ash.Query.load(:parent) |> Viable.Api.read!
+    system =
+      Viable.System
+      |> Ash.Query.filter(is_nil(parent_id))
+      |> Ash.Query.limit(1)
+      |> Viable.Api.read_one!()
 
-    system_attrs = Ash.Resource.Info.attributes(Viable.System) |> Enum.map(&Map.get(&1, :name))
-
-    system_jsons =
-      systems
-      |> Enum.map(fn system ->
-        {system, system |> Map.from_struct() |> Map.take(system_attrs) |> Jason.encode!()}
-      end)
-
-    render(conn, "index.html", systems: systems, system_jsons: system_jsons)
+    render(conn, "index.html", system: system)
   end
 end

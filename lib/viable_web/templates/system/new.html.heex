@@ -3,6 +3,9 @@
   <ViableWeb.Inputs.text f={f} field={:name} />
   <ViableWeb.Inputs.text f={f} field={:description} />
   <ViableWeb.Inputs.select f={f} field={:level} options={["1": "one", "2": "two", "3": "three", "3*": "three_star", "4": "four", "5": "five"]}/>
+  <%#= if @parent_id do %>
+    <%#= hidden_input f, :parent_id  %>
+  <%# end %>
   <!-- <ViableWeb.Inputs.select f={f} field={:parent} options={@parent_options}/> -->
 </div>
 <%= submit "Save", class: "py-2 px-4 text-white bg-emerald-600 rounded" %>

@@ -5,33 +5,26 @@ defmodule ViableWeb.SystemLive.New do
 
   alias ViableWeb.SystemLive
 
-  def new_form() do
-    Viable.System
-    |> AshPhoenix.Form.for_create(:create,
-      api: Viable.Api,
-      forms: [
-        system: [
-          resource: Viable.System,
-          create_action: :create,
-          update_action: :update
-        ]
-      ]
-    )
-  end
-
   def render(assigns) do
     Phoenix.View.render(ViableWeb.SystemView, "new.html", assigns)
   end
 
   def mount(_params, context, socket) do
-    parent_options =
-      Viable.System
-      |> Ash.Query.filter(level == :one)
-      |> Viable.Api.read!()
-      |> Enum.map(&{&1.name, &1})
-      |> Enum.into([])
+    parent_id = Map.get(context, "parent_id")
 
-    {:ok, assign(socket, form: new_form(), parent_options: parent_options)}
+    assigns =
+      socket
+      |> assign(:form, new_form(parent_id))
+      |> assign(:parent_id, parent_id)
+
+    {:ok, assigns}
+  end
+
+  def new_form(parent_id) do
+    Viable.System
+    |> AshPhoenix.Form.for_create(:create,
+      api: Viable.Api
+    )
   end
 
   # In order to use the `add_form` and `remove_form` helpers, you
@@ -44,14 +37,14 @@ defmodule ViableWeb.SystemLive.New do
     {:noreply, assign(socket, :form, form)}
   end
 
-  def handle_event("save", _params, socket) do
+  def handle_event("save", params, socket) do
     case AshPhoenix.Form.submit(socket.assigns.form) do
       {:ok, result} ->
-        with [{pid, pid}] <- Registry.lookup(Viable.Registry, ViableWeb.SystemLive) do
-          GenServer.call(pid, :update_list)
+        with %{parent_id: parent_id} when not is_nil(parent_id) <- socket.assigns do
+          :ok = Phoenix.PubSub.broadcast(Viable.PubSub, socket.assigns.parent_id, :update)
         end
 
-        {:noreply, assign(socket, :form, new_form())}
+        {:noreply, assign(socket, :form, new_form(socket.assigns.parent_id))}
 
       {:error, form} ->
         {:noreply, assign(socket, :form, form)}
