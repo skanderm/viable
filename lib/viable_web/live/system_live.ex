@@ -8,7 +8,9 @@ defmodule ViableWeb.SystemLive do
   end
 
   def mount(params, %{"system_id" => system_id}, socket) do
-    :ok = Phoenix.PubSub.subscribe(Viable.PubSub, "system:#{system_id}")
+    if system_id do
+      :ok = Phoenix.PubSub.subscribe(Viable.PubSub, "system:#{system_id}")
+    end
     assigns = socket
     |> assign(:system_id, system_id)
     |> assign(:system, get_system(system_id))
@@ -21,7 +23,8 @@ defmodule ViableWeb.SystemLive do
   end
 
   def get_system(system_id) do
-    # Not very efficient
+    # Not very efficient - loads the system, its children,
+    # then itself again through the :parent relationship
     Viable.System
     |> Ash.Query.filter(id == ^system_id)
     |> Ash.Query.load([:parent, children: :parent])

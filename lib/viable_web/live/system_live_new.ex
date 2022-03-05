@@ -12,18 +12,25 @@ defmodule ViableWeb.SystemLive.New do
   def mount(_params, context, socket) do
     parent_id = Map.get(context, "parent_id")
 
+    parent =
+      if !is_nil(parent_id) do
+        Viable.System |> Ash.Query.filter(id == ^parent_id) |> Viable.Api.read_one!()
+      end
+
     assigns =
       socket
-      |> assign(:form, new_form(parent_id))
+      |> assign(:form, new_form(parent))
+      |> assign(:parent, parent)
       |> assign(:parent_id, parent_id)
 
     {:ok, assigns}
   end
 
-  def new_form(parent_id) do
+  def new_form(parent) do
     Viable.System
     |> AshPhoenix.Form.for_create(:create,
-      api: Viable.Api
+      api: Viable.Api,
+      forms: [parent: [resource: Viable.System, update_action: :update, data: parent]]
     )
   end
 
@@ -41,10 +48,15 @@ defmodule ViableWeb.SystemLive.New do
     case AshPhoenix.Form.submit(socket.assigns.form) do
       {:ok, result} ->
         with %{parent_id: parent_id} when not is_nil(parent_id) <- socket.assigns do
-          :ok = Phoenix.PubSub.broadcast(Viable.PubSub, socket.assigns.parent_id, :update)
+          :ok =
+            Phoenix.PubSub.broadcast(
+              Viable.PubSub,
+              "system:#{socket.assigns.parent_id}",
+              :update_list
+            )
         end
 
-        {:noreply, assign(socket, :form, new_form(socket.assigns.parent_id))}
+        {:noreply, assign(socket, :form, new_form(socket.assigns.parent))}
 
       {:error, form} ->
         {:noreply, assign(socket, :form, form)}
