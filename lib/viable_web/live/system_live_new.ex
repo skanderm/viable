@@ -22,9 +22,10 @@ defmodule ViableWeb.SystemLive.New do
   end
 
   def update(assigns, socket) do
-    classes = assigns
-    |> Map.get(:classes, " ")
-    |> Kernel.<>(container_class(assigns.variant))
+    classes =
+      assigns
+      |> Map.get(:classes, " ")
+
     assigns =
       socket
       |> assign(assigns)
@@ -32,13 +33,6 @@ defmodule ViableWeb.SystemLive.New do
       |> assign(:form, new_form(assigns.parent))
 
     {:ok, assigns}
-  end
-
-  def container_class(variant \\ :box) do
-    case variant do
-      :box -> " w-80 p-4 border border-2 border-slate-300 rounded "
-      _ -> "  w-80 p-4 border border-2 border-slate-300 rounded "
-    end
   end
 
   # In order to use the `add_form` and `remove_form` helpers, you
