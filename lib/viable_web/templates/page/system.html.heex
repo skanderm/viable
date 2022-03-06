@@ -49,5 +49,11 @@
         </.circle>
       </div>
     <% end %>
+
+    <div class="col-start-2 flex justify-center">
+      <.circle classes="mt-3 p-4">
+        <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_one"} parent={@system} level={:one} />
+      </.circle>
+    </div>
   </div>
 </div>
