@@ -20,7 +20,7 @@ defmodule ViableWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    live "/system", SystemLive
+    live "/systems/:id", SystemLive, :show
   end
 
   # Other scopes may use custom stacks.

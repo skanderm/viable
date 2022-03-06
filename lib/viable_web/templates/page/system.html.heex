@@ -1,5 +1,10 @@
 <div class="p-4">
   <h1 class="text-center text-3xl"><%= @system.name %></h1>
+  <%= if @system.parent do %>
+    <div class="text-center">
+      <a href={"/systems/#{@system.parent.id}"} class="text-1xl hover:underline hover:decoration-indigo-400"><%= "<#{@system.parent.name}>" %></a>
+    </div>
+  <% end %>
   <div class="grid justify-center m-5 p-3">
     <div class="row-start-1 row-end-4 border border-2 rounded col-start-2 col-end-4 p-5 border-dashed"></div>
       <.box classes="row-start-1 col-start-2 m-4">
@@ -10,13 +15,13 @@
         <% end %>
       </.box>
 
-    <%= if is_nil(four(@system)) do %>
-      <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_four"} parent={@system} level={:four} />
-    <% else %>
       <.box classes="row-start-2 col-start-2 m-4">
-        <.display system={four(@system)} />
+        <%= if is_nil(four(@system)) do %>
+          <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_four"} parent={@system} level={:four} />
+        <% else %>
+          <.display system={four(@system)} />
+        <% end %>
       </.box>
-    <% end %>
 
     <.box classes="row-start-3 col-start-2 m-4">
       <%= if is_nil(three(@system)) do %>

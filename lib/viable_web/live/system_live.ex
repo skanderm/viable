@@ -7,12 +7,20 @@ defmodule ViableWeb.SystemLive do
     Phoenix.View.render(ViableWeb.PageView, "system.html", assigns)
   end
 
-  def mount(params, %{"system_id" => system_id}, socket) do
+  def mount(params, session, socket) do
+    system_id =
+      case params do
+        %{"id" => id} -> id
+        _ -> Map.get(session, "system_id")
+      end
+
     if system_id do
       :ok = Phoenix.PubSub.subscribe(Viable.PubSub, "system:#{system_id}")
     end
-    assigns = socket
-    |> assign(:system, get_system(system_id))
+
+    assigns =
+      socket
+      |> assign(:system, get_system(system_id))
 
     {:ok, assigns}
   end
