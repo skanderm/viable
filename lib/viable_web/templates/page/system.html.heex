@@ -1,16 +1,15 @@
-<%= live_render(
-  @socket,
-  ViableWeb.SystemLive.New,
-  id: "#{@system.id}_new",
-  session: %{"parent_id" => @system.id}) %>
-<%= for system <- [@system | @system.children] do %>
-  <div class="mb-3">
-    <span class="text-emerald-800">[<%= system.level %>]</span>
-    <%= system.name %>
-    <span class="text-slate-400">(id: <%= system.id %>) </span>
-    <%= if system.parent do %> <div class="text-sm"><%= "<#{system.parent.name}>" %></div> <% end %>
-    <%= if system.description do %>
-      <p class="text-slate-500"><%= system.description %></p>
-    <% end %>
+<div class="p-3">
+  <h1 class="text-center text-3xl"><%= @system.name %></h1>
+  <div class="grid justify-center m-5 p-3">
+    <div class="row-start-1 row-end-4 border border-2 rounded col-start-1 col-end-3 p-5 border-dashed"></div>
+    <ViableWeb.Subsystem.box system={five(@system)} classes="row-start-1 col-start-1 m-4" />
+    <ViableWeb.Subsystem.box system={four(@system)} classes="row-start-2 col-start-1 m-4" />
+    <ViableWeb.Subsystem.box system={three(@system)} classes="row-start-3 col-start-1 m-4" />
+    <ViableWeb.Subsystem.triangle system={two(@system)} classes="row-start-3 col-start-2 col-end-3 m-4" />
   </div>
-<% end %>
+  <%= live_render(
+    @socket,
+    ViableWeb.SystemLive.New,
+    id: "#{@system.id}_new",
+    session: %{"parent_id" => @system.id}) %>
+</div>

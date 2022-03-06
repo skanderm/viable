@@ -6,6 +6,5 @@
   <%= for parent_form <- inputs_for(f, :parent) do %>
     <%= hidden_inputs_for(parent_form) %>
   <% end %>
-  <!-- <ViableWeb.Inputs.select f={f} field={:parent} options={@parent_options}/> -->
 </div>
 <%= submit "Save", class: "py-2 px-4 text-white bg-emerald-600 rounded" %>

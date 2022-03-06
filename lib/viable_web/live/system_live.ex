@@ -12,14 +12,13 @@ defmodule ViableWeb.SystemLive do
       :ok = Phoenix.PubSub.subscribe(Viable.PubSub, "system:#{system_id}")
     end
     assigns = socket
-    |> assign(:system_id, system_id)
     |> assign(:system, get_system(system_id))
 
     {:ok, assigns}
   end
 
   def handle_info(:update_list, socket) do
-    {:noreply, assign(socket, :system, get_system(socket.assigns.system_id))}
+    {:noreply, assign(socket, :system, get_system(socket.assigns.system.id))}
   end
 
   def get_system(system_id) do
