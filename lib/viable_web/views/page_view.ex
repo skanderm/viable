@@ -1,6 +1,8 @@
 defmodule ViableWeb.PageView do
   use ViableWeb, :view
 
+  import ViableWeb.Subsystem
+
   def ones(system) do
     Enum.filter(system.children, &( &1.level == :one ))
   end

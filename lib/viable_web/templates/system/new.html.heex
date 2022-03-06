@@ -1,10 +1,24 @@
-<%= f = form_for @form, "#", [phx_change: :validate, phx_submit: :save] %>
-<div class="flex flex-col mb-3">
-  <ViableWeb.Inputs.text f={f} field={:name} />
-  <ViableWeb.Inputs.text f={f} field={:description} />
-  <ViableWeb.Inputs.select f={f} field={:level} options={["1": "one", "2": "two", "3": "three", "3*": "three_star", "4": "four", "5": "five"]}/>
-  <%= for parent_form <- inputs_for(f, :parent) do %>
-    <%= hidden_inputs_for(parent_form) %>
-  <% end %>
+<div class={@classes}>
+  <%= f = form_for @form, "#", [phx_change: :validate, phx_submit: :save, phx_target: @myself] %>
+  <div class="flex flex-col mb-3">
+    <div class="flex justify-between mb-3">
+      <div>
+        <div class="mt-1 relative rounded-md focus:shadow-sm max-w-sm">
+          <%= text_input f, :name, class: "focus:ring-gray-500 focus:border-gray-500 block w-full p-2 sm:text-sm border border-transparent border-b-gray-300 focus:rounded-md focus:outline-none", placeholder: "System name" %>
+        </div>
+        <%= error_tag f, :name, class: "text-red-500 ml-2" %>
+      </div>
+      <span class="text-3xl font-bold text-slate-500"><%= Viable.System.level_number(@level) %></span>
+    </div>
+
+    <div class="mt-1 relative rounded-md focus:shadow-sm max-w-sm">
+      <%= textarea f, :description, class: "focus:ring-gray-500 focus:border-gray-500 border block w-full p-2 sm:text-sm focus:rounded-md border border-transparent border-b-gray-300 focus:outline-none", placeholder: "System description" %>
+    </div>
+    <%= error_tag f, :description, class: "text-red-500 ml-2" %>
+    <%= hidden_input f, :level, value: @level %>
+    <%= for parent_form <- inputs_for(f, :parent) do %>
+      <%= hidden_inputs_for(parent_form) %>
+    <% end %>
+  </div>
+  <%= submit "Save", class: "py-2 px-4 text-white bg-emerald-600/80 rounded w-full" %>
 </div>
-<%= submit "Save", class: "py-2 px-4 text-white bg-emerald-600 rounded" %>

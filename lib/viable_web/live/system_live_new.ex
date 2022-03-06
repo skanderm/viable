@@ -1,5 +1,5 @@
 defmodule ViableWeb.SystemLive.New do
-  use ViableWeb, :live_view
+  use ViableWeb, :live_component
 
   require Ash.Query
 
@@ -9,21 +9,8 @@ defmodule ViableWeb.SystemLive.New do
     Phoenix.View.render(ViableWeb.SystemView, "new.html", assigns)
   end
 
-  def mount(_params, context, socket) do
-    parent_id = Map.get(context, "parent_id")
-
-    parent =
-      if !is_nil(parent_id) do
-        Viable.System |> Ash.Query.filter(id == ^parent_id) |> Viable.Api.read_one!()
-      end
-
-    assigns =
-      socket
-      |> assign(:form, new_form(parent))
-      |> assign(:parent, parent)
-      |> assign(:parent_id, parent_id)
-
-    {:ok, assigns}
+  def mount(socket) do
+    {:ok, socket}
   end
 
   def new_form(parent) do
@@ -32,6 +19,26 @@ defmodule ViableWeb.SystemLive.New do
       api: Viable.Api,
       forms: [parent: [resource: Viable.System, update_action: :update, data: parent]]
     )
+  end
+
+  def update(assigns, socket) do
+    classes = assigns
+    |> Map.get(:classes, " ")
+    |> Kernel.<>(container_class(assigns.variant))
+    assigns =
+      socket
+      |> assign(assigns)
+      |> assign(:classes, classes)
+      |> assign(:form, new_form(assigns.parent))
+
+    {:ok, assigns}
+  end
+
+  def container_class(variant \\ :box) do
+    case variant do
+      :box -> " w-80 p-4 border border-2 border-slate-300 rounded "
+      _ -> "  w-80 p-4 border border-2 border-slate-300 rounded "
+    end
   end
 
   # In order to use the `add_form` and `remove_form` helpers, you
@@ -47,11 +54,11 @@ defmodule ViableWeb.SystemLive.New do
   def handle_event("save", params, socket) do
     case AshPhoenix.Form.submit(socket.assigns.form) do
       {:ok, result} ->
-        with %{parent_id: parent_id} when not is_nil(parent_id) <- socket.assigns do
+        with %{parent: parent} when not is_nil(parent) <- socket.assigns do
           :ok =
             Phoenix.PubSub.broadcast(
               Viable.PubSub,
-              "system:#{socket.assigns.parent_id}",
+              "system:#{socket.assigns.parent.id}",
               :update_list
             )
         end
