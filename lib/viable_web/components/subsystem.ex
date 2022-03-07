@@ -60,7 +60,7 @@ defmodule ViableWeb.Subsystem do
         <% end %>
         <%= if @system.parent do %> <div class="text-sm text-neutral-500"><%= "<#{@system.parent.name}>" %></div> <% end %>
       </div>
-      <span class="text-2xl font-bold text-slate-500"><%= @level_number %></span>
+      <span class="text-2xl font-bold text-slate-500 ml-3"><%= @level_number %></span>
     </div>
     <p class="text-stone-600 text-sm">
       <%= @system.description %>
