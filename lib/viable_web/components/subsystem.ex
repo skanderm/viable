@@ -47,11 +47,17 @@ defmodule ViableWeb.Subsystem do
     ~H"""
     <div class="flex justify-between mb-3">
       <div>
-        <a
-          href={"/systems/#{@system.id}"}
-          class="font-semibold text-md mr-5 hover:underline hover:decoration-indigo-400">
-          <%= @system.name %>
-        </a>
+        <%= if @system.level == :one do %>
+          <a
+            href={"/systems/#{@system.id}"}
+            class="font-semibold text-md mr-5 text-emerald-600 hover:underline hover:decoration-emerald-600">
+            <%= @system.name %>
+          </a>
+        <% else %>
+          <h4 class="font-semibold text-md mr-5">
+            <%= @system.name %>
+          </h4>
+        <% end %>
         <%= if @system.parent do %> <div class="text-sm text-neutral-500"><%= "<#{@system.parent.name}>" %></div> <% end %>
       </div>
       <span class="text-2xl font-bold text-slate-500"><%= @level_number %></span>

@@ -31,19 +31,19 @@
       <% end %>
     </.box>
 
-    <.triangle classes="row-start-3 col-start-3 col-end-4 m-4 self-center justify-self-center">
-      <%= if is_nil(three(@system)) do %>
-        <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_three_star"} parent={@system} level={:three} skeleton={true} />
+    <.triangle system={three_star(@system)} variant="down" classes="row-start-3 col-start-1 col-end-2 m-4 self-center justify-self-center">
+      <%= if is_nil(three_star(@system)) do %>
+        <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_three_star"} parent={@system} level={:three_star} skeleton={true} />
       <% else %>
-        <.display system={two(@system)} />
+        <.display system={three_star(@system)} />
       <% end %>
     </.triangle>
 
-    <.triangle system={three_star(@system)} variant="down" classes="row-start-3 col-start-1 col-end-2 m-4 self-center justify-self-center">
-      <%= if is_nil(three_star(@system)) do %>
-        <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_two"} parent={@system} level={:three_star} skeleton={true} />
+    <.triangle classes="row-start-3 col-start-3 col-end-4 m-4 self-center justify-self-center">
+      <%= if is_nil(two(@system)) do %>
+        <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_two"} parent={@system} level={:two} skeleton={true} />
       <% else %>
-        <.display system={three_star(@system)} />
+        <.display system={two(@system)} />
       <% end %>
     </.triangle>
 

@@ -1,8 +1,8 @@
 <div class={@classes}>
   <%= if @skeleton do %>
-    <div class="group hover:cursor-pointer h-40" phx-click="toggle_skeleton" phx-target={@myself}>
-      <span class="text-3xl font-bold text-slate-500 float-right"><%= Viable.System.level_number(@level) %></span>
-      <div class="flex flex-col justify-between items-center">
+    <div class="group hover:cursor-pointer h-36 relative" phx-click="toggle_skeleton" phx-target={@myself}>
+      <span class="text-3xl font-bold text-slate-500 absolute right-0"><%= Viable.System.level_number(@level) %></span>
+      <div class="flex flex-col justify-center items-center h-full">
         <span class="text-8xl text-slate-400  group-hover:text-slate-600">+</span>
         <span class="text-sm text-slate-400 uppercase group-hover:text-slate-600">Add system</span>
       </div>
