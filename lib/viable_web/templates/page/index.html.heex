@@ -5,9 +5,10 @@
       Viable
     </span>
   </h1>
-  <p class="text-xl text-slate-700">
+  <p class="text-xl text-slate-700 mb-8">
     Viable helps prefigurative autonomous organizations become more effective by using the Viable System Model.
   </p>
 
-  <%= live_render(@conn, ViableWeb.SystemLive, session: %{"system_id" => @system.id}) %>
+  <a class="py-4 px-5 border border-slate-500 rounded" href="/systems/new">Build a new system</a>
+
 </div>
