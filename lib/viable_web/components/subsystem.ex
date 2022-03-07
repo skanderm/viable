@@ -64,11 +64,9 @@ defmodule ViableWeb.Subsystem do
 
   def skeleton(assigns) do
     ~H"""
-    <div class={"w-80 p-4 border border-2 border-slate-300 rounded flex flex-column justify-center items-center" <> @classes}>
       <span class="text-3xl font-bold text-slate-500"><%= Viable.System.level_number(@level) %></span>
       <span class="text-6xl font-bold text-slate-500">+</span>
       <span class="text-md text-slate-500">Add system</span>
-    </div>
     """
   end
 end

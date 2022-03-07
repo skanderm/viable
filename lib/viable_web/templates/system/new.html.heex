@@ -1,24 +1,37 @@
 <div class={@classes}>
-  <%= f = form_for @form, "#", [phx_change: :validate, phx_submit: :save, phx_target: @myself] %>
-  <div class="flex flex-col mb-3">
-    <div class="flex justify-between mb-3">
-      <div>
-        <div class="mt-1 relative rounded-md focus:shadow-sm max-w-sm">
-          <%= text_input f, :name, class: "focus:ring-gray-500 focus:border-gray-500 block w-full p-2 sm:text-sm border border-transparent border-b-gray-300 focus:rounded-md focus:outline-none", placeholder: "System name" %>
-        </div>
-        <%= error_tag f, :name, class: "text-red-500 ml-2" %>
+  <%= if @skeleton do %>
+    <div class="group hover:cursor-pointer h-40" phx-click="toggle_skeleton" phx-target={@myself}>
+      <span class="text-3xl font-bold text-slate-500 float-right"><%= Viable.System.level_number(@level) %></span>
+      <div class="flex flex-col justify-between items-center">
+        <span class="text-8xl text-slate-400  group-hover:text-slate-600">+</span>
+        <span class="text-sm text-slate-400 uppercase group-hover:text-slate-600">Add system</span>
       </div>
-      <span class="text-3xl font-bold text-slate-500"><%= Viable.System.level_number(@level) %></span>
     </div>
+  <% else %>
+    <%= f = form_for @form, "#", [phx_change: :validate, phx_submit: :save, phx_target: @myself] %>
+    <div class="flex flex-col mb-3">
+      <div class="flex justify-between mb-3">
+        <div>
+          <div class="mt-1 relative rounded-md focus:shadow-sm max-w-sm">
+            <%= text_input f, :name, class: "focus:ring-gray-400 focus:border-gray-400 block w-full p-2 sm:text-sm border border-transparent border-b-gray-300 focus:rounded-md focus:outline-none", placeholder: "System name" %>
+          </div>
+          <%= error_tag f, :name, class: "text-sm text-red-500 ml-2" %>
+        </div>
+        <span class="text-3xl font-bold text-slate-500"><%= Viable.System.level_number(@level) %></span>
+      </div>
 
-    <div class="mt-1 relative rounded-md focus:shadow-sm max-w-sm">
-      <%= textarea f, :description, class: "focus:ring-gray-500 focus:border-gray-500 border block w-full p-2 sm:text-sm focus:rounded-md border border-transparent border-b-gray-300 focus:outline-none", placeholder: "System description" %>
+      <div class="mt-1 relative rounded-md focus:shadow-sm max-w-sm">
+        <%= textarea f, :description, class: "focus:ring-gray-400 focus:border-gray-400 border block w-full p-2 sm:text-sm focus:rounded-md border border-transparent border-b-gray-300 focus:outline-none", placeholder: "System description" %>
+      </div>
+      <%= error_tag f, :description, class: "text-sm text-red-500 ml-2" %>
+      <%= hidden_input f, :level, value: @level %>
+      <%= for parent_form <- inputs_for(f, :parent) do %>
+        <%= hidden_inputs_for(parent_form) %>
+      <% end %>
     </div>
-    <%= error_tag f, :description, class: "text-red-500 ml-2" %>
-    <%= hidden_input f, :level, value: @level %>
-    <%= for parent_form <- inputs_for(f, :parent) do %>
-      <%= hidden_inputs_for(parent_form) %>
-    <% end %>
-  </div>
-  <%= submit "Save", class: "py-2 px-4 text-white bg-emerald-600/80 rounded w-full" %>
+    <div class="flex">
+      <span class="hover:cursor-pointer py-2 px-4 rounded mr-2 border border-1 border-gray-300 text-gray-500" phx-click="toggle_skeleton" phx-target={@myself}>&times;</span>
+      <%= submit "Save", class: "py-2 px-4 text-white bg-emerald-600/80 rounded grow" %>
+    </div>
+  <% end %>
 </div>

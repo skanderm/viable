@@ -40,8 +40,6 @@ defmodule ViableWeb.SystemLive.New do
   # need to make sure that you are validating the form on change
   def handle_event("validate", %{"form" => params}, socket) do
     form = AshPhoenix.Form.validate(socket.assigns.form, params)
-    # You can also skip errors by setting `errors: false` if you only want to show errors on submit
-    # form = AshPhoenix.Form.validate(socket.assigns.form, params, errors: false)
     {:noreply, assign(socket, :form, form)}
   end
 
@@ -62,5 +60,9 @@ defmodule ViableWeb.SystemLive.New do
       {:error, form} ->
         {:noreply, assign(socket, :form, form)}
     end
+  end
+
+  def handle_event("toggle_skeleton", _, socket) do
+    {:noreply, assign(socket, :skeleton, !socket.assigns.skeleton)}
   end
 end
