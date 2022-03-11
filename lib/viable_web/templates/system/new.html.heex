@@ -1,4 +1,4 @@
-<div class={@classes}>
+<div class={@classes} phx-click-away="enable_skeleton" phx-target={@myself}>
   <%= if @skeleton do %>
     <div class="group hover:cursor-pointer h-36 relative" phx-click="toggle_skeleton" phx-target={@myself}>
       <span class="text-3xl font-bold text-slate-500 absolute right-0"><%= Viable.System.level_number(@level) %></span>

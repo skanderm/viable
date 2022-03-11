@@ -3,8 +3,6 @@ defmodule ViableWeb.SystemLive.New do
 
   require Ash.Query
 
-  alias ViableWeb.SystemLive
-
   def render(assigns) do
     Phoenix.View.render(ViableWeb.SystemView, "new.html", assigns)
   end
@@ -15,9 +13,14 @@ defmodule ViableWeb.SystemLive.New do
 
   def new_form(parent) do
     Viable.System
-    |> AshPhoenix.Form.for_create(:create,
-      api: Viable.Api,
-      forms: [parent: [resource: Viable.System, update_action: :update, data: parent]]
+    |> AshPhoenix.Form.for_create(:create, api: Viable.Api,
+      forms: [
+        parent: [
+          resource: Viable.System,
+          update_action: :update,
+          data: parent
+        ]
+      ]
     )
   end
 
@@ -36,7 +39,6 @@ defmodule ViableWeb.SystemLive.New do
   end
 
   # In order to use the `add_form` and `remove_form` helpers, you
-  #
   # need to make sure that you are validating the form on change
   def handle_event("validate", %{"form" => params}, socket) do
     form = AshPhoenix.Form.validate(socket.assigns.form, params)
@@ -55,7 +57,7 @@ defmodule ViableWeb.SystemLive.New do
             )
         end
 
-        {:noreply, assign(socket, :form, new_form(socket.assigns.parent))}
+        {:noreply, assign(socket, :form, new_form(Map.get(socket.assigns, "parent")))}
 
       {:error, form} ->
         {:noreply, assign(socket, :form, form)}
@@ -64,5 +66,9 @@ defmodule ViableWeb.SystemLive.New do
 
   def handle_event("toggle_skeleton", _, socket) do
     {:noreply, assign(socket, :skeleton, !socket.assigns.skeleton)}
+  end
+
+  def handle_event("enable_skeleton", _, socket) do
+    {:noreply, assign(socket, :skeleton, true)}
   end
 end

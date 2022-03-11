@@ -20,7 +20,7 @@ defmodule ViableWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/systems/new", SystemController, :new
+    live "/systems/new", SystemLive, :new
     live "/systems/:id", SystemLive, :show
   end
 

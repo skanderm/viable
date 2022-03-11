@@ -7,58 +7,58 @@
   <% end %>
   <div class="grid justify-center m-5 p-3">
     <div class="row-start-1 row-end-4 border border-2 rounded col-start-2 col-end-4 p-5 border-dashed"></div>
-      <.box classes="row-start-1 col-start-2 m-4">
+      <Subsystem.box classes="row-start-1 col-start-2 m-4">
         <%= if is_nil(five(@system)) do %>
           <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_five"} parent={@system} level={:five} skeleton={true} />
         <% else %>
-          <.display system={five(@system)} />
+          <Subsystem.display system={five(@system)} />
         <% end %>
-      </.box>
+      </Subsystem.box>
 
-      <.box classes="row-start-2 col-start-2 m-4">
+      <Subsystem.box classes="row-start-2 col-start-2 m-4">
         <%= if is_nil(four(@system)) do %>
           <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_four"} parent={@system} level={:four} skeleton={true} />
         <% else %>
-          <.display system={four(@system)} />
+          <Subsystem.display system={four(@system)} />
         <% end %>
-      </.box>
+      </Subsystem.box>
 
-    <.box classes="row-start-3 col-start-2 m-4">
+    <Subsystem.box classes="row-start-3 col-start-2 m-4">
       <%= if is_nil(three(@system)) do %>
         <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_three"} parent={@system} level={:three} skeleton={true} />
       <% else %>
-        <.display system={three(@system)} />
+        <Subsystem.display system={three(@system)} />
       <% end %>
-    </.box>
+    </Subsystem.box>
 
-    <.triangle system={three_star(@system)} variant="down" classes="row-start-3 col-start-1 col-end-2 m-4 self-center justify-self-center">
+    <Subsystem.triangle system={three_star(@system)} variant="down" classes="row-start-3 col-start-1 col-end-2 m-4 self-center justify-self-center">
       <%= if is_nil(three_star(@system)) do %>
         <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_three_star"} parent={@system} level={:three_star} skeleton={true} />
       <% else %>
-        <.display system={three_star(@system)} />
+        <Subsystem.display system={three_star(@system)} />
       <% end %>
-    </.triangle>
+    </Subsystem.triangle>
 
-    <.triangle classes="row-start-3 col-start-3 col-end-4 m-4 self-center justify-self-center">
+    <Subsystem.triangle classes="row-start-3 col-start-3 col-end-4 m-4 self-center justify-self-center">
       <%= if is_nil(two(@system)) do %>
         <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_two"} parent={@system} level={:two} skeleton={true} />
       <% else %>
-        <.display system={two(@system)} />
+        <Subsystem.display system={two(@system)} />
       <% end %>
-    </.triangle>
+    </Subsystem.triangle>
 
     <%= for one <- ones(@system) do %>
       <div class="col-start-2 flex justify-center">
-        <.circle classes="mt-3 p-4">
-          <.display system={one} />
-        </.circle>
+        <Subsystem.circle classes="mt-3 p-4">
+          <Subsystem.display system={one} />
+        </Subsystem.circle>
       </div>
     <% end %>
 
     <div class="col-start-2 flex justify-center">
-      <.circle classes="mt-3 p-4">
+      <Subsystem.circle classes="mt-3 p-4">
         <.live_component module={ViableWeb.SystemLive.New} id={"#{@system.id}_new_one"} parent={@system} level={:one} skeleton={true} />
-      </.circle>
+      </Subsystem.circle>
     </div>
   </div>
 </div>
