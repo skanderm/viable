@@ -50,7 +50,6 @@ name | string | Name of the system (e.g. 'Kitchen operations' for a System 1 in 
 description | string | Description of the system, (e.g. 'Assign tasks for the day using whiteboard' as a system 2 coordinating function)
 level | enum | System number/level: {one, two, three, three_star, four, five}
 parent_id | uuid | The parent System 1 this subsystem belongs to
-system_type | string | Exclusively on System 1: Whether it's an organization, team, working group, collective, etc.
 
 
 #### Environment
@@ -75,6 +74,23 @@ to_system_id | uuid | System ID destination
 from_environment_id | uuid | Environment ID source
 to_environment_id | uuid | Environment ID destination
 
+
+## API Usage
+The app uses [`ash_json_api`](https://hexdocs.pm/ash_json_api/readme.html) to offer a full [json:api](https://jsonapi.org/)-specified API for interacting with the data layer. Each resource (systems, environment, channel) has related routes for reading and modifying data. Requesting a list of systems with `level=five` looks like:
+
+`curl -g -s --url 'http://localhost:4000/api/systems?filter[level]=five' | jq`
+
+The other resources are accessed via `/api/environments` and `/api/channels`. Further examples are found under `data/examples.sh`.
+
+
+## Next steps
+The sky's the limit! The UI has initially been developed using [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html) but the API works with any other frontend. Some ideas (which may be mutually exclusive):
+
+- Continue to use LiveView for realtime collaboration
+- Switch to React for potentially faster development with familiar tools
+- Create a zoomable interface like [Eagle Mode](http://eaglemode.sourceforge.net/emvideo.html)
+- Create an open-ended experience for drawing systems, environments, etc. onto a 2D canvas
+- Further develop how channels can [measure performance](https://en.wikipedia.org/wiki/Viable_system_model#Measuring_performance) and raise algedonic alerts
 
 ## Resources
 
