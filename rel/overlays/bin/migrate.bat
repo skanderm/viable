@@ -1,0 +1,1 @@
+call "%~dp0\viable" eval Viable.Release.migrate

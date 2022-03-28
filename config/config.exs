@@ -51,6 +51,8 @@ config :mime, :types, %{
   "application/vnd.api+json" => ["json"]
 }
 
+config :viable, :ash_apis, [Viable.Api]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
