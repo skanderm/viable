@@ -30,6 +30,18 @@ config :logger, level: :info
 #         certfile: System.get_env("SOME_APP_SSL_CERT_PATH")
 #       ]
 #
+
+host = System.get_env("PHX_HOST")
+
+config :viable, Viable.Endpoint,
+  url: [host: host, port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  force_ssl: [
+    host: nil,
+    rewrite_on: [:x_forwarded_port, :x_forwarded_proto],
+    hsts: false,
+  ]
+
 # The `cipher_suite` is set to `:strong` to support only the
 # latest and more secure SSL ciphers. This means old browsers
 # and clients may not be supported. You can set it to

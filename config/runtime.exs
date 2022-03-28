@@ -40,11 +40,12 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  host = System.get_env("PHX_HOST")
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :viable, ViableWeb.Endpoint,
-    url: [host: host, port: 443],
+    url: [host: host],
+    server: true,
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
