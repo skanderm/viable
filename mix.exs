@@ -35,7 +35,7 @@ defmodule Viable.MixProject do
     [
       {:ash, "~> 1.51"},
       {:ash_postgres, "~> 0.41.7"},
-      {:ash_json_api, "~> 0.28.6"},
+      {:ash_json_api, "~> 0.29.0"},
       {:phoenix, "~> 1.6.6"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
@@ -53,7 +53,7 @@ defmodule Viable.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:ecto_psql_extras, "~> 0.6"},
-      {:ash_phoenix, "~> 0.5.18"}
+      {:ash_phoenix, "~> 0.7.1"}
     ]
   end
 

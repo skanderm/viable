@@ -1,8 +1,6 @@
 defmodule ViableWeb.Router do
   use ViableWeb, :router
 
-  require AshJsonApi
-
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -27,7 +25,7 @@ defmodule ViableWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api" do
     pipe_through :api
-    AshJsonApi.forward("/", Viable.Api)
+    forward "/", Viable.Api.Router
   end
 
   # Enables LiveDashboard only for development
