@@ -20,6 +20,7 @@ defmodule ViableWeb.Router do
     get "/", PageController, :index
     live "/systems/new", SystemLive, :new
     live "/systems/:id", SystemLive, :show
+    live "/orgs/new", FormLive
   end
 
   # Other scopes may use custom stacks.

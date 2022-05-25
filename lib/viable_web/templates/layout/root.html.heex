@@ -10,16 +10,13 @@
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
   <body>
-    <header>
-      <section class="">
-        <nav>
-          <ul>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li class="text-right"><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-          </ul>
-        </nav>
-      </section>
+    <header class="flex justify-between">
+      <%= if @conn.request_path != "/" do %>
+        <%= link "Viable", to: "/", class: "text-lg p-2 text-emerald-600" %>
+      <% end %>
+      <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+        <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "p-2 ml-auto" %>
+      <% end %>
     </header>
     <%= @inner_content %>
   </body>

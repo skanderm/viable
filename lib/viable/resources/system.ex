@@ -64,15 +64,4 @@ defmodule Viable.System do
       :five -> "5"
     end
   end
-
-  def level_order(level) do
-    case level do
-      :one -> "1"
-      :two -> "2"
-      :three -> 3
-      :three_star -> "3*"
-      :four -> 2
-      :five -> 1
-    end
-  end
 end
