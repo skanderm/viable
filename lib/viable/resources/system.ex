@@ -47,11 +47,14 @@ defmodule Viable.System do
   end
 
   actions do
+    read :read, primary?: true
     create :create do
       argument :parent, :map
       accept [:id, :name, :description, :level]
       change manage_relationship(:parent, type: :replace)
     end
+    update :update
+    destroy :destroy
   end
 
   def level_number(level) do

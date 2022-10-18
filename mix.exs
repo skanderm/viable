@@ -7,7 +7,7 @@ defmodule Viable.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers(),
+      compilers: [] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -33,7 +33,7 @@ defmodule Viable.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:ash, "~> 1.51"},
+      {:ash, "~> 1.53"},
       {:ash_postgres, "~> 0.41.7"},
       {:ash_json_api, "~> 0.29.0"},
       {:phoenix, "~> 1.6.6"},
