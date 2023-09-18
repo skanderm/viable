@@ -10,5 +10,8 @@
   </p>
 
   <a class="py-4 px-5 border border-slate-500 rounded" href="/systems/new">Create a new system</a>
+  <%= if assigns[:system] do %>
+    <a class="py-4 px-5 border border-slate-500 rounded" href={"/systems/#{@system.id}"}>See an example</a>
+  <% end %>
 
 </div>
