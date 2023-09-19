@@ -6,7 +6,7 @@ defmodule ViableWeb.PageController do
   def index(conn, _params) do
     system =
       Viable.System
-      |> Ash.Query.filter(is_nil(parent_id))
+      |> Ash.Query.filter(is_nil(parent_id) and name == "Viable Coop")
       |> Ash.Query.limit(1)
       |> Viable.Api.read_one!()
 
